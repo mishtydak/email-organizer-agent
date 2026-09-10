@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Organizer Agent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="glass-panel main-header">
+            <div class="logo">
+                <h1>Email Organizer Agent</h1>
+                <p class="subtitle">AI-Powered Academic Assistant</p>
+            </div>
+            <button id="process-inbox-btn" class="primary-btn pulse">Process Inbox</button>
+        </header>
+
+        <main>
+            <section class="summary-cards" id="metrics-container">
+                <!-- Metrics injected by JS -->
+            </section>
+            
+            <div class="system-diagnostics-container">
+                <section class="panel glass-panel diagnostics-panel">
+                    <h2><span class="icon">⚙️</span> System Diagnostics</h2>
+                    <div class="content-scroll" id="diagnostics-list">
+                        <!-- Diagnostics injected by JS -->
+                    </div>
+                </section>
+                
+                <section class="panel glass-panel pipeline-panel">
+                    <h2><span class="icon">🔄</span> Agent Pipeline</h2>
+                    <div class="content-scroll" id="pipeline-list">
+                        <!-- Pipeline status injected by JS -->
+                    </div>
+                </section>
+            </div>
+
+            <div class="dashboard-grid">
+                <section class="panel glass-panel" id="inbox-section">
+                    <h2><span class="icon">📥</span> Triaged Inbox</h2>
+                    <div class="content-scroll" id="inbox-list"></div>
+                </section>
+
+                <section class="panel glass-panel" id="drafts-section">
+                    <h2><span class="icon">📝</span> Draft Queue</h2>
+                    <div class="content-scroll" id="drafts-list"></div>
+                </section>
+                
+                <section class="panel glass-panel" id="tasks-section">
+                    <h2><span class="icon">✅</span> Action Items</h2>
+                    <div class="content-scroll" id="tasks-list"></div>
+                </section>
+
+                <section class="panel glass-panel" id="meetings-section">
+                    <h2><span class="icon">📅</span> Meeting Requests</h2>
+                    <div class="content-scroll" id="meetings-list"></div>
+                </section>
+
+                <section class="panel glass-panel" id="followups-section">
+                    <h2><span class="icon">⏰</span> Follow-ups</h2>
+                    <div class="content-scroll" id="followups-list"></div>
+                </section>
+
+                <section class="panel glass-panel" id="audit-section">
+                    <h2><span class="icon">🛡️</span> Approval History</h2>
+                    <div class="content-scroll" id="audit-list"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal for Draft Editing -->
+    <div id="draft-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <h3>Edit Draft</h3>
+            <input type="hidden" id="edit-draft-id">
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" id="edit-draft-subject" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Body</label>
+                <textarea id="edit-draft-body" class="input-field" rows="5"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button id="save-draft-btn" class="primary-btn">Save</button>
+                <button id="cancel-draft-btn" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
