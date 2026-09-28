@@ -40,7 +40,7 @@ Gmail Ingestion
       ↓
 Classification (Sender, Type, Priority)
       ↓
- ┌───────────────┬───────────────┬───────────────┐
+ ┌───────────────┬───────────────┬
  ↓               ↓               ↓
 Priority       Actions        Meeting
  ↓               ↓               ↓
@@ -249,36 +249,11 @@ The repository contains an extensive testing suite in the `tests/` directory and
 *   **Synchronization:** Tests (`test_sync.py`) confirming that completing a task clears the corresponding follow-up.
 *   **Retry / Recovery:** Tests confirming graceful heuristic fallbacks when API access is denied.
 
-## Security
-
-*   Never commit `.env` containing your `GROQ_API_KEY`.
-*   Never commit `credentials.json`, `token.json`, or `calendar_token.json`.
-*   A strict `.gitignore` is included to prevent accidental exposure of these files.
-*   If you accidentally expose a key or token, revoke it immediately via the Google Cloud Console or Groq Dashboard.
-
-## Limitations
-*   **Pagination:** Currently, the system ingests a fixed batch of emails at a time (e.g., `max_results=5`) rather than fully paginating through massive unread inboxes.
-*   **Token Expiry:** If the Google OAuth refresh token fully expires, the backend will fail quietly; the user must manually delete `token.json` and re-authenticate.
-*   **Complex Attachments:** The system currently processes plain text and snippets. It does not parse complex PDF or image attachments for action items.
-
 ## Future Improvements
 *   Implement explicit rate-limit backoffs (e.g., HTTP 429 handling) for burst LLM API requests.
 *   Add dynamic pagination to process historical inbox backlogs.
 *   Introduce micro-animations in the UI to better reflect asynchronous background tasks.
 *   Extend the Calendar Agent to directly write confirmed meetings to the Google Calendar (currently read-only for availability).
-
-## Demo Flow
-To present this project in an academic or professional setting:
-1. **Start Dashboard:** Run `python app/dashboard.py` and open the browser.
-2. **Ingest Gmail:** Click "Process Inbox" to fetch live emails.
-3. **Show Classification:** Point out how emails are tagged (e.g., "Student", "High Priority").
-4. **Show Extracted Action Item:** Navigate to the Action Items panel to show the parsed deadline.
-5. **Show Meeting Request:** Demonstrate how an email requesting a meeting automatically pulls 3 available slots from Google Calendar.
-6. **Show Generated Draft:** Open a drafted response and point out how it references previous thread history (Grounding).
-7. **Show Review Queue:** Edit the draft slightly, click "Approve".
-8. **Demonstrate Safety:** Explain that until approved, the "Send" button is unavailable.
-9. **Show Audit History:** Navigate to the Audit Log to show that your approval was recorded.
-10. **Show Synchronization:** Click "Complete" on an Action Item and show how the corresponding Follow-up automatically disappears.
 
 ## Conclusion
 The Email Organizer Agent demonstrates a pragmatic implementation of Agentic AI. Rather than attempting fully autonomous and risky operations, it acts as a force multiplier for human decision-making. By combining parallelized AI reasoning with strict governance, API integrations, and a deterministic review queue, it solves the problem of inbox overload safely and efficiently.
